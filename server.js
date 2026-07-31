@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const Wallet = require("./models/Wallet");
 const Transaction = require("./models/Transaction");
+
 const purchaseRoutes =
   require("./routes/purchaseRoutes");
 const walletRoutes =
@@ -432,16 +433,18 @@ app.get(
       ========================= */
 
       wallet.balance =
-        Number(
-          wallet.balance || 0
-        ) + paymentAmount;
+Number(wallet.balance || 0)
++
+paymentAmount;
 
-      wallet.totalAdded =
-        Number(
-          wallet.totalAdded || 0
-        ) + paymentAmount;
 
-      await wallet.save();
+wallet.totalAdded =
+Number(wallet.totalAdded || 0)
++
+paymentAmount;
+
+
+await wallet.save();
 
       /* =========================
          CREATE TRANSACTION
@@ -512,7 +515,7 @@ app.get(
         alreadyCredited: false,
 
         message:
-          "Payment verified and wallet credited",
+          "Payment successful. Balance added to your wallet.",
 
         orderId,
 
@@ -606,7 +609,4 @@ if (require.main === module) {
   startServer();
 }
 
-
 module.exports = app;
-
-startServer();
