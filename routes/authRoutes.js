@@ -665,7 +665,7 @@ router.put(
 ========================= */
 
 router.get(
-  "/admin/users",
+  "",
   async (req, res) => {
     try {
 
@@ -730,7 +730,7 @@ router.get(
 ========================= */
 
 router.get(
-  "/admin/users/:id",
+  "/:id",
   async (req, res) => {
     try {
 
