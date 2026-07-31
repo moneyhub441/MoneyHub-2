@@ -611,10 +611,20 @@ const startServer = async () => {
 
 
 if (require.main === module) {
-
   startServer();
-
 }
+
+
+connectDB()
+  .then(() => {
+    console.log("Database ready");
+  })
+  .catch((error) => {
+    console.log(
+      "Database connection failed",
+      error.message
+    );
+  });
 
 
 module.exports = app;
