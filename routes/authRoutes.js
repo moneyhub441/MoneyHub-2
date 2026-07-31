@@ -725,4 +725,59 @@ router.get(
     }
   }
 );
+/* =========================
+   ADMIN - SINGLE USER
+========================= */
+
+router.get(
+  "/admin/users/:id",
+  async (req, res) => {
+    try {
+
+      const user =
+        await User.findById(
+          req.params.id
+        )
+        .select("-password");
+
+
+      if (!user) {
+        return res.status(404).json({
+          success:false,
+          message:"User not found"
+        });
+      }
+
+
+      return res.json({
+        success:true,
+
+        user:{
+          id:user._id,
+          name:user.name,
+          mobile:user.mobile,
+          email:user.email || "",
+          inviteCode:user.inviteCode,
+          status:user.status,
+          createdAt:user.createdAt
+        }
+      });
+
+
+    } catch(error){
+
+      console.log(
+        "Single user error",
+        error
+      );
+
+
+      return res.status(500).json({
+        success:false,
+        message:"Unable to load user"
+      });
+
+    }
+  }
+);
 module.exports = router;
