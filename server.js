@@ -615,16 +615,4 @@ if (require.main === module) {
 }
 
 
-connectDB()
-  .then(() => {
-    console.log("Database ready");
-  })
-  .catch((error) => {
-    console.log(
-      "Database connection failed",
-      error.message
-    );
-  });
-
-
 module.exports = app;
