@@ -607,6 +607,8 @@ const startServer = async () => {
 
 if (require.main === module) {
   startServer();
+} else {
+  connectDB();
 }
 
 module.exports = app;
