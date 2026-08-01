@@ -622,6 +622,6 @@ if (require.main === module) {
   startServer();
 
 }
-
+connectDB();
 
 module.exports = app;
