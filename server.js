@@ -760,11 +760,20 @@ const startDB = async () => {
 
 
 app.use(async (req,res,next)=>{
+  try {
+    await startDB();
+    next();
+  } catch(error) {
+    console.error(
+      "Database middleware error:",
+      error
+    );
 
-  await startDB();
-
-  next();
-
+    return res.status(500).json({
+      success:false,
+      message:"Database connection failed"
+    });
+  }
 });
 
 
