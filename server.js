@@ -746,17 +746,37 @@ async () => {
   api/index.js will import app
 */
 
+let isConnected = false;
+
+
+const startDB = async () => {
+
+  if(isConnected){
+    return;
+  }
+
+
+  await connectDB();
+
+  isConnected = true;
+
+};
+
+
+app.use(async (req,res,next)=>{
+
+  await startDB();
+
+  next();
+
+});
+
+
 if(require.main === module){
 
   startServer();
 
 }
-else{
-
-  connectDB();
-
-}
-
 
 
 module.exports = app;
