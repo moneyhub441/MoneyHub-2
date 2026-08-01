@@ -60,8 +60,11 @@ const connectDB = async () => {
     }
 
     await mongoose.connect(
-      process.env.MONGO_URI
-    );
+  process.env.MONGO_URI,
+  {
+    serverSelectionTimeoutMS: 30000,
+  }
+);
 
     console.log(
       "MongoDB connected successfully"
@@ -72,7 +75,7 @@ const connectDB = async () => {
       error.message
     );
 
-    process.exit(1);
+    
   }
 };
 
@@ -611,7 +614,9 @@ const startServer = async () => {
 
 
 if (require.main === module) {
+
   startServer();
+
 }
 
 
