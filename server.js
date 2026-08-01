@@ -64,12 +64,10 @@ app.use(
 const connectDB = async () => {
   try {
 
-    if (!process.env.MONGO_URI) {
-      throw new Error(
-        "MONGO_URI missing"
-      );
-    }
-
+    console.log(
+      "MONGO URI EXISTS:",
+      !!process.env.MONGO_URI
+    );
 
     await mongoose.connect(
       process.env.MONGO_URI,
@@ -78,11 +76,9 @@ const connectDB = async () => {
       }
     );
 
-
     console.log(
       "MongoDB connected successfully"
     );
-
 
   } catch (error) {
 
@@ -773,10 +769,7 @@ app.use(async (req,res,next)=>{
 
 
 if(require.main === module){
-
   startServer();
-
 }
-
 
 module.exports = app;
